@@ -1,0 +1,79 @@
+﻿<Window x:Class="SharpTests.QuestionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SharpTests"
+        mc:Ignorable="d"
+        Title="QuestionWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl x:Name="tabControl" BorderThickness="0">
+
+            <TabItem Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock x:Name="questionTextBlock"/>
+
+                    <TextBox x:Name="inputBox"
+                             Grid.Row="1"/>
+
+                    <TextBox x:Name="outputBox"
+                             Grid.Row="2"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Visibility="Collapsed">
+                <Grid x:Name="grid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock x:Name="questionText"
+                               Text="frfrfrfrfdejifjerw"
+                               VerticalAlignment="Center"
+                               Margin="15 5"/>
+
+                    <Border Grid.Row="1" Margin="3"
+                            Background="#ffd65c" CornerRadius="15"
+                            MouseLeftButtonUp="Border_MouseLeftButtonUp">
+                        <TextBlock Text="answer 1"
+                                   VerticalAlignment="Center"
+                                   Margin="15"/>
+                    </Border>
+
+                    <Border Grid.Row="2" Margin="3"
+                            Background="#ff5745" CornerRadius="15">
+                        <TextBlock Text="answer 1"
+                                   VerticalAlignment="Center"
+                                   Margin="15"/>
+                    </Border>
+
+                    <Border Grid.Row="3" Margin="3"
+                            Background="#70ff45" CornerRadius="15">
+                        <TextBlock Text="answer 1"
+                                   VerticalAlignment="Center"
+                                   Margin="15"/>
+                    </Border>
+
+                    <Border Grid.Row="4" Margin="3"
+                            CornerRadius="15">
+                        <TextBlock Text="answer 1"
+                                   VerticalAlignment="Center"
+                                   Margin="15"/>
+                    </Border>
+
+                    <Button Content="ОК"
+                            Grid.Row="5"
+                            MaxWidth="200px"/>
+                </Grid>
+            </TabItem>
+            
+        </TabControl>
+    </Grid>
+</Window>

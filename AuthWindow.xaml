@@ -1,0 +1,111 @@
+﻿<Window x:Class="SharpTests.AuthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SharpTests"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="AuthWindow" Height="350" Width="450"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid>
+        <TabControl x:Name="tabControl" BorderThickness="0">
+            
+            <TabItem Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.ColumnSpan="2"
+                               TextAlignment="Center" VerticalAlignment="Center"
+                               Text="Вход" FontSize="30"/>
+
+
+                    <TextBox x:Name="loginBox"
+                             Grid.Row="1" Grid.ColumnSpan="2"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="логин"/>
+
+                    <PasswordBox x:Name="passwordBox" 
+                                 Grid.Row="2" Grid.ColumnSpan="2"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                 materialDesign:HintAssist.Hint="пароль"/>
+
+
+                    <Button Name="singUpButton" 
+                            Grid.Row="3" Height="40" Margin="20 5" 
+                            Content="Регистрация" FontSize="20" 
+                            Click="singUpButton_Click"/>
+
+                    <Button Name="singInButton" 
+                            Grid.Row="3" Grid.Column="1" Height="40" Margin="20 5" 
+                            Content="Войти" FontSize="20" 
+                            Click="singInButton_Click"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.ColumnSpan="2"
+                               TextAlignment="Center" VerticalAlignment="Center"
+                               Text="Регистрация" FontSize="30"/>
+
+
+                    <TextBox x:Name="nicknameBox"
+                             Grid.Row="1" Grid.ColumnSpan="2"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="имя"/>
+                    
+                    <TextBox x:Name="newLoginBox"
+                             Grid.Row="2" Grid.ColumnSpan="2"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="логин"/>
+
+                    <PasswordBox x:Name="newPasswordBox" 
+                                 Grid.Row="3" Grid.ColumnSpan="2"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                 materialDesign:HintAssist.Hint="пароль"/>
+                    
+                    <PasswordBox x:Name="repeatePasswordBox" 
+                                 Grid.Row="4" Grid.ColumnSpan="2"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                 materialDesign:HintAssist.Hint="повторите пароль"/>
+
+
+                    <Button Name="backButton" 
+                            Grid.Row="5" Height="40" Margin="20 5" 
+                            Content="Назад" FontSize="20" 
+                            Click="backButton_Click"/>
+
+                    <Button Name="confirmButton" 
+                            Grid.Row="5" Grid.Column="1" Height="40" Margin="20 5" 
+                            Content="Ок" FontSize="20" 
+                            Click="confirmButton_Click"/>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>
