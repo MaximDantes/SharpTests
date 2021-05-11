@@ -39,7 +39,7 @@ namespace SharpTests
 
         void FillAnswers()
         {
-            questionText.Text = Data.CurrentQuestion.Text;
+            questionText.Text = Data.CurrentQuestion.Text;~
 
             foreach (var item in Data.CurrentQuestion.Answers)
             {

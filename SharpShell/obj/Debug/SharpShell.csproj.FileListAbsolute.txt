@@ -1,0 +1,15 @@
+C:\sharp\SharpShell\bin\Debug\SharpShell.exe.config
+C:\sharp\SharpShell\bin\Debug\SharpShell.exe
+C:\sharp\SharpShell\bin\Debug\SharpShell.pdb
+C:\sharp\SharpShell\obj\Debug\SharpShell.csprojAssemblyReference.cache
+C:\sharp\SharpShell\obj\Debug\MainWindow.g.cs
+C:\sharp\SharpShell\obj\Debug\App.g.cs
+C:\sharp\SharpShell\obj\Debug\SharpShell_MarkupCompile.cache
+C:\sharp\SharpShell\obj\Debug\SharpShell_MarkupCompile.lref
+C:\sharp\SharpShell\obj\Debug\MainWindow.baml
+C:\sharp\SharpShell\obj\Debug\SharpShell.g.resources
+C:\sharp\SharpShell\obj\Debug\SharpShell.Properties.Resources.resources
+C:\sharp\SharpShell\obj\Debug\SharpShell.csproj.GenerateResource.cache
+C:\sharp\SharpShell\obj\Debug\SharpShell.csproj.CoreCompileInputs.cache
+C:\sharp\SharpShell\obj\Debug\SharpShell.exe
+C:\sharp\SharpShell\obj\Debug\SharpShell.pdb
