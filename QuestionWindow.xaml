@@ -1,79 +1,81 @@
-﻿<Window x:Class="SharpTests.QuestionWindow"
+﻿<Window x:Class="SharpTests.QuestionWIndow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SharpTests"
         mc:Ignorable="d"
-        Title="QuestionWindow" Height="450" Width="800">
-    <Grid>
-        <TabControl x:Name="tabControl" BorderThickness="0">
+        Title="QuestionWIndow" Height="800" Width="700"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid x:Name="grid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50px"/>
+            <RowDefinition Height="220px"/>
+            <RowDefinition x:Name="answerRow1"/>
+            <RowDefinition x:Name="answerRow2"/>
+            <RowDefinition x:Name="answerRow3"/>
+            <RowDefinition x:Name="answerRow4"/>
+            <RowDefinition Height="50px"/>
+        </Grid.RowDefinitions>
 
-            <TabItem Visibility="Collapsed">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-                    <TextBlock x:Name="questionTextBlock"/>
 
-                    <TextBox x:Name="inputBox"
-                             Grid.Row="1"/>
+        <Button x:Name="backButton" Content="Назад" FontSize="18" Margin="10 0"/>
+        <TextBlock x:Name="mistakesTextBox" Grid.Column="1" FontSize="22"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Text="Ошибок: 1"/>
+        <TextBlock x:Name="progressTextBox" Grid.Column="2" FontSize="22"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Text="2 / 10"/>
+        <TextBlock x:Name="timeTextBox" Grid.Column="3" FontSize="22"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Text="14.12"/>
 
-                    <TextBox x:Name="outputBox"
-                             Grid.Row="2"/>
-                </Grid>
-            </TabItem>
+        <TextBlock x:Name="questionTextBlock" Grid.Row="1" Grid.ColumnSpan="4" 
+                   TextWrapping="WrapWithOverflow" 
+                   FontSize="18" Padding="10" VerticalAlignment="Center"
+                   Text="frfrejoj fjuifwjlf;k f jf jfheiufj fjd;kfjs  f ifjkljsfdj jkfsjfjj  fjefje;ljfsiodjsl; fjk;jfa;jfd  jjf;fsjd;frfrejoj fjuifwjlf;k f jf jfheiufj fjd;kfjs  f ifjkljsfdj jkfsjfjj  fjefje;ljfsiodjsl; fjk;jfa;jfd  jjf;fsjd;kfjfi  j;afrfrejoj fjuifwjlf;k f jf jfheiufj fjd;kfjs  f ifjkljsfdj jkfsjfjj  fjefje;ljfsiodjsl; fjk;jfa;jfd  jjf;fsjd;kfjfi  j;afrfrejoj fjuifwjlf;k f jf jfheiufj fjd;kfjs  f ifjkljsfdj jkfsjfjj  fjefje;ljfsiodjsl; fjk;jfa;jfd  jjf;fsjd;kfjfi  j;afrfrejoj fjuifwjlf;k f jf jfheiufj fjd;kfjs  f ifjkljsfdj jkfsjfjj  fjefje;ljfsiodjsl; fjk;jfa;jfd  jjf;fsjd;kfjfi  j;afrfrejoj fjuifwjlf;k f jf jfheiufj fjd;kfjs  f ifjkljsfdj jkfsjfjj  fjefje;ljfsiodjsl; fjk;jfa;jfd  jjf;fsjd;kfjfi  j;afrfrejoj fjuifwjlf;k f jf jfheiufj fjd;kfjs  f ifjkljsfdj jkfsjfjj  fjefje;ljfsiodjsl; fjk;jfa;jfd  jjf;fsjd;kfjfi  j;akfjfi  j;afjd; jjiira  fjiiojdasj jiodsjf;jf;akjs"/>
 
-            <TabItem Visibility="Collapsed">
-                <Grid x:Name="grid">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+        <Border x:Name="answerBorder1" Grid.Row="2" Grid.ColumnSpan="4" CornerRadius="5" 
+                BorderBrush="#673AB7" BorderThickness="3"
+                Margin="10 5" Cursor="Hand" Height="95"
+                MouseLeftButtonUp="answerBorder1_MouseLeftButtonUp">
+            <TextBlock x:Name="answer1" FontSize="18" Padding="10 0" VerticalAlignment="Center"
+                       TextWrapping="Wrap" Text="deeeeeeeeeeeeeeee dewdw dwd dwed dwdw ddededwdwd e dewdw dwd dwed dwdw ddededwdwd e dewdw dwd dwed dwdw ddededwdwdweeeeeeeeeeeee dewdw dwd dwed dwdw ddededwdwdw" Height="76" Margin="0,10,-0.4,14"/>
+        </Border>
 
-                    <TextBlock x:Name="questionText"
-                               Text="frfrfrfrfdejifjerw"
-                               VerticalAlignment="Center"
-                               Margin="15 5"/>
+        <Border x:Name="answerBorder2" Grid.Row="3" Grid.ColumnSpan="4" CornerRadius="5" 
+                BorderBrush="#673AB7" BorderThickness="3"
+                Margin="10 5" Cursor="Hand" Height="95"
+                MouseLeftButtonUp="answerBorder2_MouseLeftButtonUp">
+            <TextBlock x:Name="answer2" FontSize="18" Padding="10 0" VerticalAlignment="Center"
+                       TextWrapping="Wrap" Text="deeeeeeeeeeeeeeee dewdw dwd dwed dwdw ddededwdwdweeeeeeeeeeeee dewdw dwd dwed dwdw ddededwdwdw"/>
+        </Border>
 
-                    <Border Grid.Row="1" Margin="3"
-                            Background="#ffd65c" CornerRadius="15"
-                            MouseLeftButtonUp="Border_MouseLeftButtonUp">
-                        <TextBlock Text="answer 1"
-                                   VerticalAlignment="Center"
-                                   Margin="15"/>
-                    </Border>
+        <Border x:Name="answerBorder3" Grid.Row="4" Grid.ColumnSpan="4" CornerRadius="5" 
+                BorderBrush="#673AB7" BorderThickness="3"
+                Margin="10 5" Cursor="Hand" Height="95"
+                MouseLeftButtonUp="answerBorder3_MouseLeftButtonUp">
+            <TextBlock x:Name="answer3" FontSize="18" Padding="10 0" VerticalAlignment="Center"
+                       TextWrapping="Wrap" Text="deeeeeeeeeeeeeeee dewdw dwd dwed dwdw ddededwdwdweeeeeeeeeeeee dewdw dwd dwed dwdw ddededwdwdw"/>
+        </Border>
 
-                    <Border Grid.Row="2" Margin="3"
-                            Background="#ff5745" CornerRadius="15">
-                        <TextBlock Text="answer 1"
-                                   VerticalAlignment="Center"
-                                   Margin="15"/>
-                    </Border>
+        <Border x:Name="answerBorder4" Grid.Row="5" Grid.ColumnSpan="4" CornerRadius="5" 
+                BorderBrush="#673AB7" BorderThickness="3"
+                Margin="10 5" Cursor="Hand" Height="95"
+                MouseLeftButtonUp="answerBorder4_MouseLeftButtonUp">
+            <TextBlock x:Name="answer4" FontSize="18" Padding="10 0" VerticalAlignment="Center"
+                       TextWrapping="Wrap" Text="deeeeeeeeeeeeeeee dewdw dwd dwed dwdw ddededwdwdweeeeeeeeeeeee dewdw dwd dwed dwdw ddededwdwdw"/>
+        </Border>
 
-                    <Border Grid.Row="3" Margin="3"
-                            Background="#70ff45" CornerRadius="15">
-                        <TextBlock Text="answer 1"
-                                   VerticalAlignment="Center"
-                                   Margin="15"/>
-                    </Border>
-
-                    <Border Grid.Row="4" Margin="3"
-                            CornerRadius="15">
-                        <TextBlock Text="answer 1"
-                                   VerticalAlignment="Center"
-                                   Margin="15"/>
-                    </Border>
-
-                    <Button Content="ОК"
-                            Grid.Row="5"
-                            MaxWidth="200px"/>
-                </Grid>
-            </TabItem>
-            
-        </TabControl>
+        <Button x:Name="confirmButton" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
+                Content="OK" FontSize="18" MaxWidth="200"
+                Click="confirmButton_Click"/>
     </Grid>
 </Window>

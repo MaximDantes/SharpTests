@@ -19,14 +19,10 @@ C:\cursach\SharpTests\bin\Debug\System.Numerics.Vectors.xml
 C:\cursach\SharpTests\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\cursach\SharpTests\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\cursach\SharpTests\obj\Debug\SharpTests.csprojAssemblyReference.cache
-C:\cursach\SharpTests\obj\Debug\AuthWindow.g.cs
-C:\cursach\SharpTests\obj\Debug\MainWindow.g.cs
 C:\cursach\SharpTests\obj\Debug\App.g.cs
 C:\cursach\SharpTests\obj\Debug\SharpTests_MarkupCompile.cache
 C:\cursach\SharpTests\obj\Debug\SharpTests_MarkupCompile.lref
 C:\cursach\SharpTests\obj\Debug\App.baml
-C:\cursach\SharpTests\obj\Debug\AuthWindow.baml
-C:\cursach\SharpTests\obj\Debug\MainWindow.baml
 C:\cursach\SharpTests\obj\Debug\SharpTests.g.resources
 C:\cursach\SharpTests\obj\Debug\SharpTests.Properties.Resources.resources
 C:\cursach\SharpTests\obj\Debug\SharpTests.csproj.GenerateResource.cache
