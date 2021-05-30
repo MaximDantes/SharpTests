@@ -32,3 +32,5 @@ C:\cursach\SharpTests\obj\Debug\SharpTests.exe
 C:\cursach\SharpTests\obj\Debug\SharpTests.pdb
 C:\cursach\SharpTests\obj\Debug\QuestionWindow.g.cs
 C:\cursach\SharpTests\obj\Debug\QuestionWindow.baml
+C:\cursach\SharpTests\obj\Debug\MainWindow.g.cs
+C:\cursach\SharpTests\obj\Debug\MainWindow.baml

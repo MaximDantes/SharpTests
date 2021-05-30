@@ -88,6 +88,9 @@
     <Compile Include="Data\Models\Question.cs" />
     <Compile Include="Data\Models\Test.cs" />
     <Compile Include="Data\Models\User.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="QuestionWIndow.xaml.cs">
       <DependentUpon>QuestionWIndow.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="QuestionWIndow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -20,8 +20,9 @@ namespace SharpTests
         int mistakesCount = 0;
         bool isMistaken = false;
         List<int> selectedAnswers = new List<int>();
-        public QuestionWIndow()
+        public QuestionWIndow(int testId)
         {
+            DataAcces.GetQuestions(testId);
             InitializeComponent();
 
             answerRow1.Height = new GridLength(0, GridUnitType.Star);
@@ -42,6 +43,10 @@ namespace SharpTests
             answerBorder4.BorderBrush = new SolidColorBrush(Color.FromRgb(103, 58, 183));
 
             mistakesTextBox.Text = $"Ошибки: {mistakesCount}";
+
+            progressTextBox.Text = $"{currentQuestionNumber + 1} / {Data.Questions.Count}";
+
+            confirmButton.Content = "Проверить";
 
             answerRow3.Height = new GridLength(0, GridUnitType.Star);
             answerRow4.Height = new GridLength(0, GridUnitType.Star);
@@ -73,12 +78,12 @@ namespace SharpTests
                 currentQuestionNumber++;
                 confirmButton.Click += confirmButton_Click;
                 confirmButton.Click -= confirmNextButton_Click;
+                Render();
             }
             else
             {
                 //TODO test complete
             }
-            Render();
         }
         void ValidateQuestion()
         {
@@ -111,9 +116,13 @@ namespace SharpTests
             }
             mistakesTextBox.Text = $"Ошибки: {mistakesCount}";
 
+            confirmButton.Content = "Далее";
+
             confirmButton.Click -= confirmButton_Click;
             confirmButton.Click += confirmNextButton_Click;
         }
+
+
 
         private void confirmButton_Click(object sender, RoutedEventArgs e)
         {
@@ -148,6 +157,12 @@ namespace SharpTests
             border.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 0));
             selectedAnswers.Add(3);
         }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
+        }
     }
 }
-
