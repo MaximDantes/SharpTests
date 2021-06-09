@@ -34,3 +34,15 @@ C:\cursach\SharpTests\obj\Debug\QuestionWindow.g.cs
 C:\cursach\SharpTests\obj\Debug\QuestionWindow.baml
 C:\cursach\SharpTests\obj\Debug\MainWindow.g.cs
 C:\cursach\SharpTests\obj\Debug\MainWindow.baml
+C:\cursach\SharpTests\obj\Debug\AuthWindow.g.cs
+C:\cursach\SharpTests\obj\Debug\AuthWindow.baml
+C:\cursach\SharpTests\bin\Debug\Recaptcha.dll
+C:\cursach\SharpTests\bin\Debug\Recaptcha.pdb
+C:\cursach\SharpTests\obj\Debug\ResultWindow.g.cs
+C:\cursach\SharpTests\bin\Debug\LiveCharts.dll
+C:\cursach\SharpTests\bin\Debug\LiveCharts.Wpf.dll
+C:\cursach\SharpTests\bin\Debug\LiveCharts.pdb
+C:\cursach\SharpTests\bin\Debug\LiveCharts.xml
+C:\cursach\SharpTests\bin\Debug\LiveCharts.Wpf.pdb
+C:\cursach\SharpTests\bin\Debug\LiveCharts.Wpf.xml
+C:\cursach\SharpTests\obj\Debug\ResultWindow.baml

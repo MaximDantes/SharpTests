@@ -13,16 +13,23 @@
             <TabItem Visibility="Collapsed">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
+                        <RowDefinition Height="0.5*"/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="loginTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               FontSize="20" Grid.Column="1"/>
 
                     <Border x:Name="level1" Grid.Row="1" BorderThickness="3" BorderBrush="#673AB7"
-                            CornerRadius="5" Margin="10 5" Height="70">
+                            CornerRadius="5" Margin="10 5" Height="70" Grid.ColumnSpan="2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -36,7 +43,7 @@
                         </Grid>
                     </Border>
                     <Border x:Name="level2" Grid.Row="2" BorderThickness="3" BorderBrush="#673AB7"
-                            CornerRadius="5" Margin="10 5" Height="70">
+                            CornerRadius="5" Margin="10 5" Height="70" Grid.ColumnSpan="2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -50,7 +57,7 @@
                         </Grid>
                     </Border>
                     <Border x:Name="level3" Grid.Row="3" BorderThickness="3" BorderBrush="#673AB7"
-                            CornerRadius="5" Margin="10 5" Height="70">
+                            CornerRadius="5" Margin="10 5" Height="70" Grid.ColumnSpan="2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -64,7 +71,7 @@
                         </Grid>
                     </Border>
                     <Border x:Name="level4" Grid.Row="4" BorderThickness="3" BorderBrush="#673AB7"
-                            CornerRadius="5" Margin="10 5" Height="70">
+                            CornerRadius="5" Margin="10 5" Height="70" Grid.ColumnSpan="2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -78,7 +85,7 @@
                         </Grid>
                     </Border>
                     <Border x:Name="level5" Grid.Row="5" BorderThickness="3" BorderBrush="#673AB7"
-                            CornerRadius="5" Margin="10 5" Height="70">
+                            CornerRadius="5" Margin="10 5" Height="70" Grid.ColumnSpan="2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>

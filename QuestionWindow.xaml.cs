@@ -16,12 +16,17 @@ namespace SharpTests
 {
     public partial class QuestionWIndow : Window
     {
+        int testId;
         int currentQuestionNumber = 0;
         int mistakesCount = 0;
+        int semicorrectCount = 0;
         bool isMistaken = false;
+        int time = 0;
         List<int> selectedAnswers = new List<int>();
         public QuestionWIndow(int testId)
         {
+            this.testId = testId;
+
             DataAcces.GetQuestions(testId);
             InitializeComponent();
 
@@ -31,6 +36,8 @@ namespace SharpTests
             answerRow4.Height = new GridLength(0, GridUnitType.Star);
 
             Render();
+
+            ShowTime();
         }
 
         void Render()
@@ -64,7 +71,7 @@ namespace SharpTests
                 answerRow3.Height = new GridLength(1, GridUnitType.Star);
                 answer3.Text = Data.Questions[currentQuestionNumber].Answers.ElementAt(2).Key;
             }
-            
+
             if (Data.Questions[currentQuestionNumber].Answers.Count > 3)
             {
                 answerRow4.Height = new GridLength(1, GridUnitType.Star);
@@ -82,7 +89,12 @@ namespace SharpTests
             }
             else
             {
-                //TODO test complete
+                if (mistakesCount == 0 && semicorrectCount == 0)
+                    DataAcces.CompleteTest(testId, time / 10);
+
+                ResultWindow resultWindow = new ResultWindow(currentQuestionNumber + 1 - mistakesCount, semicorrectCount, mistakesCount - semicorrectCount, time / 10);
+                resultWindow.Show();
+                this.Close();
             }
         }
         void ValidateQuestion()
@@ -97,6 +109,21 @@ namespace SharpTests
                 }
             }
 
+            int questionsCorrectAnswersCount = 0;
+            List<int> correctSelectedAnswers = new List<int>();
+
+            for (int i = 0; i < Data.Questions[currentQuestionNumber].Answers.Count; i++)
+            {
+                if (Data.Questions[currentQuestionNumber].Answers.ElementAt(i).Value)
+                {
+                    answers[i].BorderBrush = new SolidColorBrush(Color.FromRgb(0, 255, 0));
+                    questionsCorrectAnswersCount++;
+
+                    if (selectedAnswers.Contains(i))
+                        correctSelectedAnswers.Add(i);
+                }
+            }
+
             for (int i = 0; i < Data.Questions[currentQuestionNumber].Answers.Count; i++)
             {
                 if (selectedAnswers.Contains(i) && !Data.Questions[currentQuestionNumber].Answers.ElementAt(i).Value)
@@ -104,16 +131,27 @@ namespace SharpTests
                     answers[i].BorderBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
 
                     if (!isMistaken)
-                    {
                         mistakesCount++;
-                    }
                     isMistaken = true;
                 }
-                if (Data.Questions[currentQuestionNumber].Answers.ElementAt(i).Value)
-                {
-                    answers[i].BorderBrush = new SolidColorBrush(Color.FromRgb(0, 255, 0));
-                }
             }
+
+            if (selectedAnswers.Count == 0)
+            {
+                if (!isMistaken)
+                    mistakesCount++;
+                isMistaken = true;
+            }
+
+
+            if (questionsCorrectAnswersCount > selectedAnswers.Count && correctSelectedAnswers.Count > 0)
+            {
+                if (!isMistaken)
+                    mistakesCount++;
+
+                semicorrectCount++;
+            }
+
             mistakesTextBox.Text = $"Ошибки: {mistakesCount}";
 
             confirmButton.Content = "Далее";
@@ -121,8 +159,17 @@ namespace SharpTests
             confirmButton.Click -= confirmButton_Click;
             confirmButton.Click += confirmNextButton_Click;
         }
+        async void ShowTime()
+        {
+            while (true)
+            {
+                time++;
 
+                timeTextBox.Text = Convert.ToString(time / 10.0);
 
+                await Task.Delay(100);
+            }
+        }
 
         private void confirmButton_Click(object sender, RoutedEventArgs e)
         {

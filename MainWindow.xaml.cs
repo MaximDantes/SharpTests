@@ -22,15 +22,37 @@ namespace SharpTests
 
             InitializeComponent();
 
+            loginTextBlock.Text = Data.CurrentUser.Login;
+
             level1.MouseLeftButtonUp += (object sender, MouseButtonEventArgs e) => ShowTests(1);
             level2.MouseLeftButtonUp += (object sender, MouseButtonEventArgs e) => ShowTests(2);
             level3.MouseLeftButtonUp += (object sender, MouseButtonEventArgs e) => ShowTests(3);
             level4.MouseLeftButtonUp += (object sender, MouseButtonEventArgs e) => ShowTests(4);
             level5.MouseLeftButtonUp += (object sender, MouseButtonEventArgs e) => ShowTests(5);
+
+            progressTextBlock1.Text = $"{DataAcces.CalcCompletedTestsCount(1)} / {DataAcces.CalcTestsCount(1)}";
+            if (DataAcces.CalcTestsCount(1) > 0 && DataAcces.CalcCompletedTestsCount(1) / DataAcces.CalcTestsCount(1) == 1)
+                level1.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 255, 0));
+
+            progressTextBlock2.Text = $"{DataAcces.CalcCompletedTestsCount(2)} / {DataAcces.CalcTestsCount(2)}";
+            if (DataAcces.CalcTestsCount(2) > 0 && DataAcces.CalcCompletedTestsCount(2) / DataAcces.CalcTestsCount(2) == 1)
+                level2.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 255, 0));
+
+            progressTextBlock3.Text = $"{DataAcces.CalcCompletedTestsCount(3)} / {DataAcces.CalcTestsCount(3)}";
+            if (DataAcces.CalcTestsCount(3) > 0 && DataAcces.CalcCompletedTestsCount(3) / DataAcces.CalcTestsCount(3) == 1)
+                level3.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 255, 0));
+
+            progressTextBlock4.Text = $"{DataAcces.CalcCompletedTestsCount(4)} / {DataAcces.CalcTestsCount(4)}";
+            if (DataAcces.CalcTestsCount(4) > 0 && DataAcces.CalcCompletedTestsCount(4) / DataAcces.CalcTestsCount(4) == 1)
+                level4.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 255, 0));
+
+            progressTextBlock5.Text = $"{DataAcces.CalcCompletedTestsCount(5)} / {DataAcces.CalcTestsCount(5)}";
+            if (DataAcces.CalcTestsCount(5) > 0 && DataAcces.CalcCompletedTestsCount(5) / DataAcces.CalcTestsCount(5) == 1)
+                level5.BorderBrush = new SolidColorBrush(Color.FromRgb(0, 255, 0));
         }
 
         void Render()
-        {
+        { 
             List<int> removeList = new List<int>();
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(testsGrid); i++)
             {
@@ -83,7 +105,6 @@ namespace SharpTests
                 border.Child = textBlock;
             }
         }
-
 
         void ShowQuestions(int testId)
         {
