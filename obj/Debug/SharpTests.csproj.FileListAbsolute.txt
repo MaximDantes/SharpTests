@@ -46,3 +46,11 @@ C:\cursach\SharpTests\bin\Debug\LiveCharts.xml
 C:\cursach\SharpTests\bin\Debug\LiveCharts.Wpf.pdb
 C:\cursach\SharpTests\bin\Debug\LiveCharts.Wpf.xml
 C:\cursach\SharpTests\obj\Debug\ResultWindow.baml
+C:\cursach\SharpTests\obj\Debug\StatWindow.g.cs
+C:\cursach\SharpTests\obj\Debug\StatWindow.baml
+C:\cursach\SharpTests\obj\Debug\TaskWindow.g.cs
+C:\cursach\SharpTests\obj\Debug\TaskWindow.baml
+C:\cursach\SharpTests\obj\Debug\AdminWindow.g.cs
+C:\cursach\SharpTests\obj\Debug\AdminWindow.baml
+C:\cursach\SharpTests\obj\Debug\TestWindow.g.cs
+C:\cursach\SharpTests\obj\Debug\TestWindow.baml

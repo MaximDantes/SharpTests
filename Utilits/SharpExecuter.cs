@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace SharpShell
+namespace SharpTests
 {
     public delegate void ExecuteLogHandler(object message);
 
@@ -24,14 +24,12 @@ namespace SharpShell
         readonly string log = 
             "static void Log(object message) " +
             "{ " +
-                "if (SharpShell.SharpExecuter.OnExecute != null) " +
-                    "SharpShell.SharpExecuter.OnExecute(message); " +
+                "if (SharpTests.SharpExecuter.OnExecute != null) " +
+                    "SharpTests.SharpExecuter.OnExecute(message); " +
             "}";
 
-        public SharpExecuter(ExecuteLogHandler onExecute)
+        public SharpExecuter()
         {
-            OnExecute += onExecute;
-
             References = new List<string>();
             Usings = new List<string>();
 
@@ -82,7 +80,7 @@ namespace SharpShell
 
             if (compilerResult.Errors.Count == 0)
             {
-                compilerResult.CompiledAssembly.GetType("SharpShell.Program").GetMethod("Main").Invoke(null, null);
+                compilerResult.CompiledAssembly.GetType("SharpTests.Program").GetMethod("Main").Invoke(null, null);
             }
             else
             {
@@ -114,46 +112,13 @@ namespace SharpShell
 
         private string FormatCode(string text)
         {
-            text = text.Replace("Console.WriteLine(", "Log(");
+            text = text.Replace("Console.WriteLine(", "LogLine(");
+
+            text = text.Replace("Console.Write(", "Log(");
 
             text = text.Insert(text.Length - 4, log);
 
             return text;
         } 
     }
-//    SharpExecuter sharpExecuter;
-
-//    public MainWindow()
-//    {
-//        InitializeComponent();
-
-//        string header =
-//            "namespace SharpShell\n" +
-//            "{\n" +
-//            "   public class Program\n" +
-//            "   {\n" +
-//            "      public static void Main()\n" +
-//            "      {\n";
-//        string footer =
-//            "      }\n" +
-//            "   }\n" +
-//            "}\n";
-
-//        inputTextBox.Text = $"{header}\n\n{footer}";
-
-//        sharpExecuter = new SharpExecuter(new ExecuteLogHandler(Log));
-//    }
-
-//    private void runButton_Click(object sender, RoutedEventArgs e)
-//    {
-//        string code = inputTextBox.Text;
-//        sharpExecuter.Execute(code);
-//    }
-
-//    public void Log(object message)
-//    {
-//        outputTextBox.Text = string.Empty;
-//        outputTextBox.Text += message;
-//    }
-//}
 }

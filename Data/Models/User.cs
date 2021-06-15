@@ -10,5 +10,7 @@ namespace SharpTests
     {
         public int Id { get; set; }
         public string Login { get; set; }
+        public int TestsCount { get; set; }
+        public double AvgTime { get; set; }
     }
 }

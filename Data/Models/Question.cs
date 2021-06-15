@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SharpTests
 {
-    class Question
+    public class Question
     {
         public int Id { get; set; }
         public Test Test { get; set; }

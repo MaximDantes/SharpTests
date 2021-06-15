@@ -121,10 +121,20 @@ namespace SharpTests
 
             tabControl.SelectedIndex = 1;
         }
+        void ShowStat()
+        {
+            StatWindow statWindow = new StatWindow(Data.CurrentUser.Id);
+            statWindow.ShowDialog();
+        }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
             tabControl.SelectedIndex = 0;
+        }
+
+        private void statButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowStat();
         }
     }
 }

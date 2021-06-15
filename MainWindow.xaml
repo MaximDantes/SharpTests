@@ -25,6 +25,9 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
+                    <Button x:Name="statButton" Content="Статитстика" Margin="10"
+                            Click="statButton_Click"/>
+
                     <TextBlock x:Name="loginTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center"
                                FontSize="20" Grid.Column="1"/>
 

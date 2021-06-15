@@ -10,7 +10,7 @@ namespace SharpTests
     static class DataAcces
     {
         static MySqlDataBase db = new MySqlDataBase();
- 
+
         public static void GetTests()
         {
             Data.Tests.Clear();
@@ -35,9 +35,17 @@ namespace SharpTests
                 else
                     test.IsCompleted = false;
 
+                if (test.IsCompleted)
+                {
+                    query = $"SELECT `time` FROM `user_test` WHERE `user_id` = {Data.CurrentUser.Id} AND `test_id` = {(int)item.ItemArray[0]}";
+                    DataTable timeTable = db.ExecuteQuery(query);
+                    test.Time = (double)timeTable.Rows[0].ItemArray[0];
+                }
+
                 Data.Tests.Add(test);
             }
         }
+       
         public static void GetTests(int level)
         {
             Data.LevlelTests.Clear();
@@ -88,6 +96,76 @@ namespace SharpTests
 
             Data.Questions = test.Questions;
         }
+        public static void GetUsers()
+        {
+            string query = $"SELECT `user_id`, `login` FROM `users`";
+            DataTable table = db.ExecuteQuery(query);
+
+            foreach (DataRow item in table.Rows)
+            {
+                User user = new User
+                {
+                    Id = (int)item.ItemArray[0],
+                    Login = (string)item.ItemArray[1]
+                };
+
+                query = $"SELECT COUNT(*) FROM `user_test` WHERE `user_id` = {item.ItemArray[0]}";
+                DataTable count = db.ExecuteQuery(query);
+                user.TestsCount = Convert.ToInt32(count.Rows[0].ItemArray[0]);
+
+                query = $"SELECT AVG(time) FROM `user_test` WHERE `user_id` = {item.ItemArray[0]}";
+                DataTable time = db.ExecuteQuery(query);
+                string resul = Convert.ToString(time.Rows[0].ItemArray[0]);
+                if (String.IsNullOrEmpty(resul))
+                    user.AvgTime = 0;
+                else
+                    user.AvgTime = Convert.ToDouble(resul);
+
+                Data.Users.Add(user);
+            }
+        }
+
+        public static List<Test> GetCompletedTests(int userId)
+        {
+            List<Test> arr = new List<Test>();
+
+            string query = $"SELECT tests.test_id, tests.level, tests.title, user_test.time FROM `user_test` " +
+                $"INNER JOIN `tests` ON `user_test`.`test_id` = `tests`.`test_id` WHERE `user_id` = {userId}";
+            DataTable table = db.ExecuteQuery(query);
+            foreach (DataRow item in table.Rows)
+            {
+                arr.Add(new Test
+                {
+                    Id = (int)item.ItemArray[0],
+                    Level = (int)item.ItemArray[1],
+                    Title = (string)item.ItemArray[2],
+                    Time = (double)item.ItemArray[3]
+                });
+            }
+
+            return arr;
+        }
+
+        public static void AddTest(string title, int level)
+        {
+            string query = $"INSERT INTO `tests`(`level`, `title`) VALUES ({level}, '{title}')";
+            db.ExecuteQuery(query);
+            GetTests();
+        }
+
+        public static void DeleteTest(int testId)
+        {
+            string query = $"DELETE FROM `tests` WHERE `test_id` = {testId}";
+            db.ExecuteNonQuery(query);
+            GetTests();
+        }
+
+        public static void EditTest(int testId, string title, int level)
+        {
+            string query = $"UPDATE `tests` SET `level`={level},`title`='{title}' WHERE `test_id` = {testId}";
+            db.ExecuteNonQuery(query);
+            GetTests();
+        }
 
         public static int CalcCompletedTestsCount(int level)
         {
@@ -122,20 +200,33 @@ namespace SharpTests
                 return false;
             }
         }
-        public static bool SignIn(string login, string password)
+        public static string SignIn(string login, string password)
         {
-            string query = $"SELECT `user_id`, `login` FROM `users` WHERE `password` = '{password}' AND `login` = '{login}'";
+            string query = $"SELECT `admin_id`, `login` FROM `admin` WHERE `login` = '{login}' AND `password` = '{password}'";
             DataTable table = db.ExecuteQuery(query);
-
-            if (table.Rows.Count == 0)
-                return false;
-
-            Data.CurrentUser = new User()
+            if (table.Rows.Count > 0)
             {
-                Id = (int)table.Rows[0].ItemArray[0],
-                Login = (string)table.Rows[0].ItemArray[1]
-            };
-            return true;
+                Data.CurrentUser = new User()
+                {
+                    Id = 0,
+                    Login = (string)table.Rows[0].ItemArray[1]
+                };
+                return "admin";
+            }
+
+            query = $"SELECT `user_id`, `login` FROM `users` WHERE `password` = '{password}' AND `login` = '{login}'";
+            table = db.ExecuteQuery(query);
+            if (table.Rows.Count > 0)
+            {
+                Data.CurrentUser = new User()
+                {
+                    Id = (int)table.Rows[0].ItemArray[0],
+                    Login = (string)table.Rows[0].ItemArray[1]
+                };
+                return "user";
+            }
+
+            return null;
         }
 
         public static void CompleteTest(int testId, double time)

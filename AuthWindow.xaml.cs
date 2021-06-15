@@ -23,8 +23,10 @@ namespace SharpTests
 
         void SignIn()
         {
+            string authResult = DataAcces.SignIn(loginTextBox.Text, passwordTextBox.Password);
+
             if (!String.IsNullOrEmpty(loginTextBox.Text) && !String.IsNullOrEmpty(passwordTextBox.Password))
-                if (DataAcces.SignIn(loginTextBox.Text, passwordTextBox.Password))
+                if (authResult == "user")
                 {
                     MainWindow mainWindow = new MainWindow();
                     mainWindow.Show();
@@ -32,7 +34,17 @@ namespace SharpTests
                 }
                 else
                 {
-                    MessageBox.Show("Неправильный логин или пароль");
+                    if (authResult == "admin")
+                    {
+                        AdminWindow adminWindow = new AdminWindow();
+                        adminWindow.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Неправильный логин или пароль");
+                    }
+
                 }
         }
         void SignUp()

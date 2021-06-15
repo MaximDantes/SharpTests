@@ -1,0 +1,40 @@
+﻿<Window x:Class="SharpTests.TestWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SharpTests"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="TestWindow" Height="600" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox x:Name="titleTextBox" Grid.Column="0" FontSize="18" Height="50" Margin="15"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 materialDesign:HintAssist.Hint="название"/>
+
+        <TextBox x:Name="levelTextBox" Grid.Column="1" FontSize="18" Height="50" Margin="15"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 materialDesign:HintAssist.Hint="уровень"/>
+
+        <DataGrid x:Name="questionsGrid" IsReadOnly="True" Grid.Row="1" Grid.ColumnSpan="2"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Вопросы" Binding="{Binding Text}" Width="1*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button x:Name="testButton" Grid.Row="2" Grid.ColumnSpan="2" MaxWidth="150"
+                Content="OK"/>
+    </Grid>
+</Window>
