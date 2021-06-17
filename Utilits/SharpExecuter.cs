@@ -112,9 +112,9 @@ namespace SharpTests
 
         private string FormatCode(string text)
         {
-            text = text.Replace("Console.WriteLine(", "LogLine(");
+            //text = text.Replace("Console.WriteLine(", "LogLine(");
 
-            text = text.Replace("Console.Write(", "Log(");
+            text = text.Replace("Console.WriteLine(", "Log(");
 
             text = text.Insert(text.Length - 4, log);
 

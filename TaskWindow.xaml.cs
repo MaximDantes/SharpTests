@@ -38,17 +38,13 @@ namespace SharpTests
 
             sharpExecuter = new SharpExecuter();
             SharpExecuter.OnExecute += Log;
-            SharpExecuter.OnExecute += LogLine;
         }
 
         void Log(object message)
         {
             output.Text += message;
         }
-        void LogLine(object message)
-        {
-            output.Text += message;
-        }
+
 
         void Run()
         {

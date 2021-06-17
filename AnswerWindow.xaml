@@ -1,0 +1,35 @@
+﻿<Window x:Class="SharpTests.AnswerWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SharpTests"
+        mc:Ignorable="d"
+        Title="AnswerWindow" Height="300" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0.25*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBox x:Name="answerTextBox" Height="80" FontSize="18" Margin="15"
+                 TextWrapping="Wrap"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 materialDesign:HintAssist.Hint="Ответ"/>
+
+        <TextBlock Text="Правильный" Grid.Column="1" HorizontalAlignment="Center"
+                   Margin="0 30" FontSize="16"/>
+
+        <CheckBox x:Name="answerCheckBox" Grid.Column="1" VerticalAlignment="Center"
+                  HorizontalAlignment="Center"/>
+
+        <Button x:Name="answerButton" Grid.Row="1" Grid.ColumnSpan="2"
+                MaxWidth="150" Content="OK"/>
+
+    </Grid>
+</Window>

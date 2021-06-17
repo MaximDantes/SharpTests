@@ -56,5 +56,29 @@ namespace SharpTests
             }
 
         }
+
+        private void addQuestionButton_Click(object sender, RoutedEventArgs e)
+        {
+            AnswersWIndow answersWIndow = new AnswersWIndow();
+            this.Hide();
+            answersWIndow.ShowDialog();
+            this.Show();
+        }
+
+        private void deleteTestButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void questionsGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (questionsGrid.SelectedItem != null)
+            {
+                AnswersWIndow answersWIndow = new AnswersWIndow((Question)questionsGrid.SelectedItem);
+                this.Hide();
+                answersWIndow.ShowDialog();
+                this.Show();
+            }
+        }
     }
 }

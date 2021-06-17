@@ -54,3 +54,7 @@ C:\cursach\SharpTests\obj\Debug\AdminWindow.g.cs
 C:\cursach\SharpTests\obj\Debug\AdminWindow.baml
 C:\cursach\SharpTests\obj\Debug\TestWindow.g.cs
 C:\cursach\SharpTests\obj\Debug\TestWindow.baml
+C:\cursach\SharpTests\obj\Debug\AnswersWIndow.g.cs
+C:\cursach\SharpTests\obj\Debug\AnswersWIndow.baml
+C:\cursach\SharpTests\obj\Debug\AnswerWindow.g.cs
+C:\cursach\SharpTests\obj\Debug\AnswerWindow.baml
