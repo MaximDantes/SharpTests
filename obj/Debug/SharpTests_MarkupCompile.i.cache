@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\cursach\SharpTests\App.xaml
-10222005067
+11-1805074801
 
-22-1241889297
+23-1396899010
 130317899434
-AdminWindow.xaml;AnswersWIndow.xaml;AnswerWindow.xaml;AuthWindow.xaml;MainWindow.xaml;QuestionWIndow.xaml;ResultWindow.xaml;StatWindow.xaml;TaskWindow.xaml;TestWindow.xaml;
+AdminWindow.xaml;AnswersWIndow.xaml;AnswerWindow.xaml;AuthWindow.xaml;MainWindow.xaml;QuestionWIndow.xaml;ResultWindow.xaml;StatWindow.xaml;TaskWindow.xaml;TestWindow.xaml;UserWindow.xaml;
 
-True
+False
 

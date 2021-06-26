@@ -27,7 +27,7 @@
                  materialDesign:HintAssist.Hint="Вопрос"/>
 
         <DataGrid Name="answersGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
-                  Grid.RowSpan="3">
+                  Grid.RowSpan="3" MouseDoubleClick="answersGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Key}" Header="Ответ" Width="1*"/>
                 <DataGridCheckBoxColumn Binding="{Binding Value, Mode=OneWay}" 

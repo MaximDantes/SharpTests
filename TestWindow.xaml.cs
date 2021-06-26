@@ -38,7 +38,6 @@ namespace SharpTests
             testButton.Click += EditTest;
         }
 
-
         void EditTest(object sender, RoutedEventArgs e)
         {
             if (!String.IsNullOrEmpty(titleTextBox.Text) && !String.IsNullOrEmpty(levelTextBox.Text))
@@ -59,15 +58,20 @@ namespace SharpTests
 
         private void addQuestionButton_Click(object sender, RoutedEventArgs e)
         {
-            AnswersWIndow answersWIndow = new AnswersWIndow();
+            AnswersWIndow answersWIndow = new AnswersWIndow(test.Id);
             this.Hide();
             answersWIndow.ShowDialog();
+            questionsGrid.Items.Refresh();
             this.Show();
         }
 
         private void deleteTestButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (questionsGrid.SelectedItem != null)
+            {
+                DataAcces.DeleteQuestion(((Question)questionsGrid.SelectedItem).Id, test.Id);
+                questionsGrid.Items.Refresh();
+            }
         }
 
         private void questionsGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -77,6 +81,7 @@ namespace SharpTests
                 AnswersWIndow answersWIndow = new AnswersWIndow((Question)questionsGrid.SelectedItem);
                 this.Hide();
                 answersWIndow.ShowDialog();
+                questionsGrid.Items.Refresh();
                 this.Show();
             }
         }

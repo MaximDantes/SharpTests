@@ -13,7 +13,7 @@
             <TabItem Visibility="Collapsed">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.53*"/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -28,8 +28,10 @@
                     <Button x:Name="statButton" Content="Статитстика" Margin="10"
                             Click="statButton_Click"/>
 
-                    <TextBlock x:Name="loginTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center"
-                               FontSize="20" Grid.Column="1"/>
+                    <Grid x:Name="loginGrid" MouseLeftButtonUp="loginGrid_MouseLeftButtonUp" Grid.Column="1">
+                        <TextBlock x:Name="loginTextBlock" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               FontSize="20"/>
+                    </Grid>
 
                     <Border x:Name="level1" Grid.Row="1" BorderThickness="3" BorderBrush="#673AB7"
                             CornerRadius="5" Margin="10 5" Height="70" Grid.ColumnSpan="2">
@@ -95,7 +97,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="Уровень 5" FontSize="18" VerticalAlignment="Center" 
+                            <TextBlock Text="Задания" FontSize="18" VerticalAlignment="Center" 
                                        TextAlignment="Center" Margin="10"/>
                             <TextBlock x:Name="progressTextBlock5" Grid.Column="1" Text="0 / 10"
                                        VerticalAlignment="Center" TextAlignment="Center" FontSize="18"/>

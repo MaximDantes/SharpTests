@@ -32,6 +32,38 @@ namespace SharpTests
             testsGrid.Items.Refresh();
             usersGrid.Items.Refresh();
         }
+        void FindTest()
+        {
+            if (String.IsNullOrEmpty(findTestTextBox.Text) && levelComboBox.SelectedIndex == 4)
+            {
+                testsGrid.ItemsSource = Data.Tests;
+            }
+            else
+            {
+                if (!String.IsNullOrEmpty(findTestTextBox.Text) && levelComboBox.SelectedIndex < 4)
+                {
+                    testsGrid.ItemsSource = Data.Tests.Where(x => x.Title.ToLower().Contains(findTestTextBox.Text.ToLower().Trim()) && x.Level == levelComboBox.SelectedIndex + 1);
+                    return;
+                }
+                if (String.IsNullOrEmpty(findTestTextBox.Text))
+                {
+                    testsGrid.ItemsSource = Data.Tests.Where(x => x.Level == levelComboBox.SelectedIndex + 1);
+                    return;
+                }
+                if (levelComboBox.SelectedIndex == 4)
+                {
+                    testsGrid.ItemsSource = Data.Tests.Where(x => x.Title.ToLower().Contains(findTestTextBox.Text.ToLower().Trim()));
+                    return;
+                }
+            }
+        }
+        void FindUser()
+        {
+            if (!String.IsNullOrEmpty(findUserTextBox.Text))
+                usersGrid.ItemsSource = Data.Users.Where(x => x.Login.ToLower().Contains(findUserTextBox.Text.ToLower()));
+            else
+                usersGrid.ItemsSource = Data.Users;
+        }
 
         private void deleteTestButton_Click(object sender, RoutedEventArgs e)
         {
@@ -66,6 +98,31 @@ namespace SharpTests
                 StatWindow statWindow = new StatWindow(((User)usersGrid.SelectedItem).Id);
                 statWindow.ShowDialog();
             }
+        }
+
+        private void tab1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            tabControl.SelectedIndex = 0;
+        }
+
+        private void tab2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            tabControl.SelectedIndex = 1;
+        }
+
+        private void findTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FindTest();
+        }
+
+        private void levelTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FindTest();
+        }
+
+        private void findUserTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            FindUser();
         }
     }
 }

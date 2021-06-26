@@ -21,7 +21,7 @@ namespace SharpTests
         public List<string> References { get; set; }
         public List<string> Usings { get; set; }
 
-        readonly string log = 
+        readonly string log =
             "static void Log(object message) " +
             "{ " +
                 "if (SharpTests.SharpExecuter.OnExecute != null) " +
@@ -61,12 +61,12 @@ namespace SharpTests
                 "System.Windows.Forms",
                 "System.Threading",
                 "System.Threading.Tasks"
-        });
+            });
         }
 
         public void Execute(string code)
         {
-            code = FormatSources(code);
+            code = FormatCode(code);
 
             CodeDomProvider provider = CodeDomProvider.CreateProvider("CSharp");
             CompilerParameters compilerParams = new CompilerParameters()
@@ -119,6 +119,6 @@ namespace SharpTests
             text = text.Insert(text.Length - 4, log);
 
             return text;
-        } 
+        }
     }
 }

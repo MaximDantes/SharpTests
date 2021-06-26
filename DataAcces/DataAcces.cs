@@ -45,7 +45,7 @@ namespace SharpTests
                 Data.Tests.Add(test);
             }
         }
-       
+
         public static void GetTests(int level)
         {
             Data.LevlelTests.Clear();
@@ -66,6 +66,7 @@ namespace SharpTests
                 if (item.Id == testId)
                     test = item;
             }
+            test.Questions.Clear();
 
             foreach (DataRow item in table.Rows)
             {
@@ -77,20 +78,14 @@ namespace SharpTests
                     Text = (string)item.ItemArray[3],
                     Answers = new Dictionary<string, bool>()
                 };
-                question.Answers.Add((string)item.ItemArray[4], true);
-                try
-                {
-                    question.Answers.Add((string)item.ItemArray[5], true);
-                    question.Answers.Add((string)item.ItemArray[6], true);
-                }
-                catch { }
-                question.Answers.Add((string)item.ItemArray[7], false);
-                try
-                {
-                    question.Answers.Add((string)item.ItemArray[8], false);
-                    question.Answers.Add((string)item.ItemArray[9], false);
-                }
-                catch { }
+
+                try { question.Answers.Add((string)item.ItemArray[4], true); } catch { }
+                try { question.Answers.Add((string)item.ItemArray[5], true); } catch { }
+                try { question.Answers.Add((string)item.ItemArray[6], true); } catch { }
+                try { question.Answers.Add((string)item.ItemArray[7], false); } catch { }
+                try { question.Answers.Add((string)item.ItemArray[8], false); } catch { }
+                try { question.Answers.Add((string)item.ItemArray[9], false); } catch { }
+
                 test.Questions.Add(question);
             }
 
@@ -152,6 +147,34 @@ namespace SharpTests
             db.ExecuteQuery(query);
             GetTests();
         }
+        public static void AddQuestion(int testId, string text)
+        {
+            string query = $"INSERT INTO `questions`(`test_id`, `type`, `text`) VALUES ({testId}, 'test', '{text}')";
+            db.ExecuteNonQuery(query);
+            GetQuestions(testId);
+        }
+        public static void AddAnswer(Question question, string text, bool isCorrect)
+        {
+            int correctCount = 0;
+            int incorrectCount = 0;
+            for (int i = 0; i < question.Answers.Count; i++)
+            {
+                if (question.Answers.ElementAt(i).Value)
+                    correctCount++;
+                else
+                    incorrectCount++;
+            }
+            string query;
+
+            if (isCorrect)
+                query = $"UPDATE `questions` SET `correct_answer_{correctCount + 1}` = '{text}' WHERE `question_id` = {question.Id}";
+            else
+                query = $"UPDATE `questions` SET `incorrect_answer_{incorrectCount + 1}` = '{text}' WHERE `question_id` = {question.Id}";
+
+            db.ExecuteNonQuery(query);
+
+            GetQuestions(question.Test.Id);
+        }
 
         public static void DeleteTest(int testId)
         {
@@ -159,12 +182,61 @@ namespace SharpTests
             db.ExecuteNonQuery(query);
             GetTests();
         }
+        public static void DeleteQuestion(int questionId, int testId)
+        {
+            string query = $"DELETE FROM `questions` WHERE `question_id` = {questionId}";
+            db.ExecuteNonQuery(query);
+            GetQuestions(testId);
+        }
+        public static void DeleteAnswer(Question question, string text, bool isCorrect)
+        {
+            int correctCount = 0;
+            int incorrectCount = 0;
+            for (int i = 0; i < question.Answers.Count; i++)
+            {
+                if (question.Answers.ElementAt(i).Value)
+                {
+                    correctCount++;
+                    if (question.Answers.ElementAt(i).Value == isCorrect && question.Answers.ElementAt(i).Key == text)
+                        break;
+                }
+                else
+                {
+                    incorrectCount++;
+                    if (question.Answers.ElementAt(i).Value == isCorrect && question.Answers.ElementAt(i).Key == text)
+                        break;
+                }
+            }
+            string query;
+
+            if (isCorrect)
+                query = $"UPDATE `questions` SET `correct_answer_{correctCount}`= NULL WHERE `question_id` = {question.Id}";
+            else
+                query = $"UPDATE `questions` SET `incorrect_answer_{incorrectCount}`= NULL WHERE `question_id` = {question.Id}";
+
+            db.ExecuteNonQuery(query);
+
+            GetQuestions(question.Test.Id);
+        }
 
         public static void EditTest(int testId, string title, int level)
         {
             string query = $"UPDATE `tests` SET `level`={level},`title`='{title}' WHERE `test_id` = {testId}";
             db.ExecuteNonQuery(query);
             GetTests();
+        }
+        public static void EditQuestion(int questionId, int testId, string text)
+        {
+            string query = $"UPDATE `questions` SET`text` = '{text}' WHERE `question_id` = {questionId}";
+            db.ExecuteNonQuery(query);
+            GetQuestions(testId);
+        }
+        public static bool EditUser(int userId, string login, string password)
+        {
+            string query = $"UPDATE `users` SET `login`='{login}',`password`='{password}' WHERE `user_id` = {userId}";
+            bool result = db.ExecuteNonQuery(query);
+            SignIn(login, password);
+            return result;
         }
 
         public static int CalcCompletedTestsCount(int level)
@@ -193,6 +265,7 @@ namespace SharpTests
             string query = $"INSERT INTO `users`(`login`, `password`) VALUES ('{login}', '{password}')";
             if (db.ExecuteNonQuery(query))
             {
+                SignIn(login, password);
                 return true;
             }
             else

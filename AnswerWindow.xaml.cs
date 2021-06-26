@@ -18,13 +18,16 @@ namespace SharpTests
     {
         string answer;
         bool isCorrect;
-        public AnswerWindow()
+        Question question;
+        public AnswerWindow(Question question)
         {
+            this.question = question;
+
             InitializeComponent();
 
             answerButton.Click += AddAnswer;
         }
-        public AnswerWindow(string answer, bool isCorrect) : this()
+        public AnswerWindow(Question question, string answer, bool isCorrect) : this(question)
         {
             this.answer = answer;
             this.isCorrect = isCorrect;
@@ -38,12 +41,19 @@ namespace SharpTests
 
         void AddAnswer(object sender, RoutedEventArgs e)
         {
-
+            if (!String.IsNullOrEmpty(answerTextBox.Text))
+            {
+                DataAcces.AddAnswer(question, answerTextBox.Text, (bool)answerCheckBox.IsChecked);
+                this.Close();
+            }
         }
 
         void EditAnswer(object sender, RoutedEventArgs e)
         {
+            if (!String.IsNullOrEmpty(answerTextBox.Text))
+            {
 
+            }
         }
     }
 }

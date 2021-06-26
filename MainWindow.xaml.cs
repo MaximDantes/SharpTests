@@ -16,6 +16,7 @@ namespace SharpTests
 {
     public partial class MainWindow : Window
     {
+        int level = -1;
         public MainWindow()
         {
             DataAcces.GetTests();
@@ -52,7 +53,7 @@ namespace SharpTests
         }
 
         void Render()
-        { 
+        {
             List<int> removeList = new List<int>();
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(testsGrid); i++)
             {
@@ -89,7 +90,11 @@ namespace SharpTests
                 Grid.SetRow(border, i + 1);
 
                 int index = i;
-                border.MouseLeftButtonUp += (object sender, MouseButtonEventArgs e) => ShowQuestions(Data.LevlelTests[index].Id);
+
+                if (level == 4)
+                    border.MouseLeftButtonUp += (object sender, MouseButtonEventArgs e) => ShowQuestions(Data.LevlelTests[index].Id);
+                else
+                    border.MouseLeftButtonUp += (object sender, MouseButtonEventArgs e) => ShowTasks(Data.LevlelTests[index].Id);
 
                 testsGrid.Children.Add(border);
 
@@ -100,7 +105,7 @@ namespace SharpTests
                     FontSize = 18,
                     VerticalAlignment = VerticalAlignment.Center,
                     TextAlignment = TextAlignment.Center,
-                    Cursor=Cursors.Hand
+                    Cursor = Cursors.Hand
                 };
                 border.Child = textBlock;
             }
@@ -111,11 +116,18 @@ namespace SharpTests
             QuestionWIndow questionWIndow = new QuestionWIndow(testId);
             questionWIndow.Show();
             this.Close();
-
+        }
+        void ShowTasks(int testId)
+        {
+            TaskWindow taskWindow = new TaskWindow();
+            taskWindow.Show();
+            this.Close();
         }
         void ShowTests(int level)
         {
             DataAcces.GetTests(level);
+
+            this.level = level;
 
             Render();
 
@@ -135,6 +147,13 @@ namespace SharpTests
         private void statButton_Click(object sender, RoutedEventArgs e)
         {
             ShowStat();
+        }
+
+        private void loginGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            UserWindow userWindow = new UserWindow();
+            userWindow.ShowDialog();
+            loginTextBlock.Text = Data.CurrentUser.Login;
         }
     }
 }

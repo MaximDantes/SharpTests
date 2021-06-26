@@ -18,8 +18,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Image Source="tests.png" Grid.Row="0"/>
-        <Image Source="users.png" Grid.Row="1"/>
+        <Grid x:Name="tab1" Grid.Row="0" MouseLeftButtonUp="tab1_MouseLeftButtonUp">
+            <Image  Source="tests.png" Margin="10"/>
+        </Grid>
+        <Grid x:Name="tab2" Grid.Row="1" MouseLeftButtonUp="tab2_MouseLeftButtonUp">
+            <Image  Source="users.png" Margin="10"/>
+        </Grid>
 
         <TabControl x:Name="tabControl" Grid.Column="1" Grid.RowSpan="2" BorderThickness="0" SelectedIndex="0">
 
@@ -46,11 +50,23 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <TextBox x:Name="findTextBox" Grid.Column="1" FontSize="18" Height="50" Margin="5"
+                    <TextBox x:Name="findTestTextBox" Grid.Column="1" FontSize="18" Height="50" Margin="10"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="поиск"/>
+                             materialDesign:HintAssist.Hint="Поиск"
+                             TextChanged="findTextBox_TextChanged"/>
 
-                    <Button x:Name="addTestButton" Grid.Row="1" Grid.Column="1" Content="+" Height="60" Width="60" 
+                    <ComboBox x:Name="levelComboBox" Grid.Column="1" Grid.Row="1" FontSize="18" Height="50" Margin="10"
+                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                             materialDesign:HintAssist.Hint="Уровень" SelectedIndex="4"
+                             SelectionChanged="levelTextBox_SelectionChanged">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="Все"/>
+                    </ComboBox>
+
+                    <Button x:Name="addTestButton" Grid.Row="2" Grid.Column="1" Content="+" Height="60" Width="60" 
                             FontSize="40" Click="addTestButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -62,7 +78,7 @@
                         </Button.Template>
                     </Button>
 
-                    <Button x:Name="deleteTestButton" Grid.Row="2" Grid.Column="1" Content="-" Height="60" Width="60" 
+                    <Button x:Name="deleteTestButton" Grid.Row="3" Grid.Column="1" Content="-" Height="60" Width="60" 
                             FontSize="40" Click="deleteTestButton_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -79,6 +95,11 @@
 
             <TabItem Visibility="Collapsed">
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.4*"/>
+                    </Grid.ColumnDefinitions>
+                    
                     <DataGrid x:Name="usersGrid" Grid.RowSpan="5" AutoGenerateColumns="False" IsReadOnly="True"
                               MouseDoubleClick="usersGrid_MouseDoubleClick">
                         <DataGrid.Columns>
@@ -87,9 +108,14 @@
                             <DataGridTextColumn Header="Среднее время" Binding="{Binding AvgTime}" Width="1*"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                </Grid> 
+
+                    <TextBox x:Name="findUserTextBox" Grid.Column="1" FontSize="18" Height="50" Margin="10"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Поиск" VerticalAlignment="Top"
+                             TextChanged="findUserTextBox_TextChanged"/>
+                </Grid>
             </TabItem>
-            
+
         </TabControl>
     </Grid>
 </Window>

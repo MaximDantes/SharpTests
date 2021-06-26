@@ -23,6 +23,21 @@ namespace SharpTests
             InitializeComponent();
 
             string header =
+                "using System;\n" +
+                "using System.IO;\n" +
+                "using System.Net;\n" +
+                "using System.Threading;\n" +
+                "using System.Collections.Generic;\n" +
+                "using System.Text;\n" +
+                "using System.Text.RegularExpressions;\n" +
+                //"using System.ComponentModel;\n" +
+                "using System.Data;\n\n" +
+                //"using System.Drawing;\n" +
+                //"using System.Diagnostics;\n" +
+                //"using System.Linq;\n" +
+                //"using System.Windows.Forms;\n" +
+                //"using System.Threading;\n" +
+                //"using System.Threading.Tasks;\n\n" +
                 "namespace SharpTests\n" +
                 "{\n" +
                 "   public class Program\n" +

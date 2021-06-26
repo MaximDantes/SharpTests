@@ -17,40 +17,75 @@ namespace SharpTests
     public partial class AnswersWIndow : Window
     {
         Question question;
-        public AnswersWIndow()
+        int testId;
+        public AnswersWIndow(int testId)
         {
+            this.testId = testId;
+
             InitializeComponent();
 
             answersButton.Click += AddAnswer;
         }
-        public AnswersWIndow(Question question) : this()
+        public AnswersWIndow(Question question) : this(question.Test.Id)
         {
             this.question = question;
 
             questionTextBox.Text = question.Text;
-            answersGrid.ItemsSource = question.Answers;
+            RefreshGrid();
 
             answersButton.Click -= AddAnswer;
             answersButton.Click += EditAnswer;
         }
 
+        void RefreshGrid()
+        {
+            question = Data.Questions.Find(x => x.Id == question.Id);
+            answersGrid.ItemsSource = question.Answers;
+            answersGrid.Items.Refresh();
+        }
+
         void EditAnswer(object sender, RoutedEventArgs e)
         {
-
+            if (!String.IsNullOrEmpty(questionTextBox.Text))
+            {
+                DataAcces.EditQuestion(question.Id, testId, questionTextBox.Text);
+                this.Close();
+            }
         }
         void AddAnswer(object sender, RoutedEventArgs e)
         {
-
+            if (!String.IsNullOrEmpty(questionTextBox.Text))
+            {
+                DataAcces.AddQuestion(testId, questionTextBox.Text);
+                this.Close();
+            }
         }
 
         private void addAnswertButton_Click(object sender, RoutedEventArgs e)
         {
-
+            AnswerWindow answerWindow = new AnswerWindow(question);
+            answerWindow.ShowDialog();
+            RefreshGrid();
         }
 
         private void deleteAnswerButton_Click(object sender, RoutedEventArgs e)
         {
+            if (answersGrid.SelectedIndex >= 0)
+            {
+                DataAcces.DeleteAnswer(question, question.Answers.ElementAt(answersGrid.SelectedIndex).Key, question.Answers.ElementAt(answersGrid.SelectedIndex).Value);
+                RefreshGrid();
+            }
+        }
 
+        private void answersGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (answersGrid.SelectedIndex >= 0)
+            {
+                AnswerWindow answerWindow = new AnswerWindow(question,
+                    question.Answers.ElementAt(answersGrid.SelectedIndex).Key, question.Answers.ElementAt(answersGrid.SelectedIndex).Value);
+                answerWindow.ShowDialog();
+                RefreshGrid();
+            }
         }
     }
 }
