@@ -24,11 +24,17 @@
 
         <TextBox x:Name="titleTextBox" Grid.Column="0" FontSize="18" Height="50" Margin="15 5"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 materialDesign:HintAssist.Hint="название"/>
+                 materialDesign:HintAssist.Hint="Название"/>
 
-        <TextBox x:Name="levelTextBox" Grid.Column="1" FontSize="18" Height="50" Margin="15 5"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" Grid.ColumnSpan="2"
-                 materialDesign:HintAssist.Hint="уровень"/>
+        <ComboBox x:Name="levelComboBox" Grid.Column="1" FontSize="18" Height="50" Margin="15 5"
+                 Style="{StaticResource MaterialDesignFloatingHintComboBox}" Grid.ColumnSpan="2"
+                 materialDesign:HintAssist.Hint="Уровень">
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2"/>
+            <ComboBoxItem Content="3"/>
+            <ComboBoxItem Content="4"/>
+            <ComboBoxItem Content="Задания"/>
+        </ComboBox>
 
         <DataGrid x:Name="questionsGrid" IsReadOnly="True" Grid.Row="1" Grid.ColumnSpan="2"
                   Grid.RowSpan="3" AutoGenerateColumns="False"

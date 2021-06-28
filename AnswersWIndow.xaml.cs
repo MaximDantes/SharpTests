@@ -57,15 +57,24 @@ namespace SharpTests
             if (!String.IsNullOrEmpty(questionTextBox.Text))
             {
                 DataAcces.AddQuestion(testId, questionTextBox.Text);
-                this.Close();
+                this.question = Data.Questions[Data.Questions.Count - 1];
+                answersButton.Click -= AddAnswer;
+                answersButton.Click += EditAnswer;
             }
         }
 
         private void addAnswertButton_Click(object sender, RoutedEventArgs e)
         {
-            AnswerWindow answerWindow = new AnswerWindow(question);
-            answerWindow.ShowDialog();
-            RefreshGrid();
+            if (this.question != null)
+            {
+                AnswerWindow answerWindow = new AnswerWindow(question);
+                answerWindow.ShowDialog();
+                RefreshGrid();
+            }
+            else
+            {
+                MessageBox.Show("Перед добавлением ответов необходимо сохранить вопрос");
+            }
         }
 
         private void deleteAnswerButton_Click(object sender, RoutedEventArgs e)

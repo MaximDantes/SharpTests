@@ -16,16 +16,24 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid x:Name="tab1" Grid.Row="0" MouseLeftButtonUp="tab1_MouseLeftButtonUp">
             <Image  Source="tests.png" Margin="10"/>
         </Grid>
-        <Grid x:Name="tab2" Grid.Row="1" MouseLeftButtonUp="tab2_MouseLeftButtonUp">
+        <Grid x:Name="tab2" Grid.Row="2" MouseLeftButtonUp="tab2_MouseLeftButtonUp">
             <Image  Source="users.png" Margin="10"/>
         </Grid>
+        <Grid x:Name="tab3" Grid.Row="1" MouseLeftButtonUp="tab3_MouseLeftButtonUp">
+            <Image  Source="tasks.png" Margin="10"/>
+        </Grid>
+        <Grid x:Name="tab4" Grid.Row="3" MouseLeftButtonUp="tab4_MouseLeftButtonUp">
+            <Image  Source="settings.png" Margin="10"/>
+        </Grid>
 
-        <TabControl x:Name="tabControl" Grid.Column="1" Grid.RowSpan="2" BorderThickness="0" SelectedIndex="0">
+        <TabControl x:Name="tabControl" Grid.Column="1" Grid.RowSpan="4" BorderThickness="0" SelectedIndex="0">
 
             <TabItem Visibility="Collapsed">
                 <Grid>
@@ -116,6 +124,35 @@
                 </Grid>
             </TabItem>
 
+            <TabItem Visibility="Collapsed"></TabItem>
+            
+            <TabItem Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBox x:Name="adminLoginTextBox" Grid.Row="0" FontSize="18" Height="50" Margin="80 10"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Логин" VerticalAlignment="Top"/>
+
+                    <PasswordBox x:Name="adminPasswordBox" Grid.Row="1" FontSize="18" Height="50" Margin="80 10"
+                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                             materialDesign:HintAssist.Hint="Пароль" VerticalAlignment="Top"/>
+
+                    <PasswordBox x:Name="adminRepeatedPasswordBox" Grid.Row="2" FontSize="18" Height="50" Margin="80 10"
+                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                             materialDesign:HintAssist.Hint="Повторите пароль" VerticalAlignment="Top"/>
+
+                    <Button x:Name="settingsButton" Grid.Row="3" Width="150" Content="OK"
+                            Click="settingsButton_Click"/>
+
+                </Grid>
+            </TabItem>
+            
         </TabControl>
     </Grid>
 </Window>

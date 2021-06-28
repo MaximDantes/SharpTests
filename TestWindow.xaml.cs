@@ -29,7 +29,7 @@ namespace SharpTests
             this.test = test;
 
             titleTextBox.Text = test.Title;
-            levelTextBox.Text = Convert.ToString(test.Level);
+            levelComboBox.SelectedIndex = test.Level - 1;
 
             DataAcces.GetQuestions(test.Id);
             questionsGrid.ItemsSource = test.Questions;
@@ -40,29 +40,49 @@ namespace SharpTests
 
         void EditTest(object sender, RoutedEventArgs e)
         {
-            if (!String.IsNullOrEmpty(titleTextBox.Text) && !String.IsNullOrEmpty(levelTextBox.Text))
+            if (!String.IsNullOrEmpty(titleTextBox.Text) && levelComboBox.SelectedIndex >= 0)
             {
-                DataAcces.EditTest(test.Id, titleTextBox.Text, Convert.ToInt32(levelTextBox.Text));
+                DataAcces.EditTest(test.Id, titleTextBox.Text, Convert.ToInt32(levelComboBox.SelectedIndex + 1));
                 this.Close();
             }
         }
         void AddTest(object sender, RoutedEventArgs e)
         {
-            if (!String.IsNullOrEmpty(titleTextBox.Text) && !String.IsNullOrEmpty(levelTextBox.Text))
+            if (!String.IsNullOrEmpty(titleTextBox.Text) && levelComboBox.SelectedIndex >= 0)
             {
-                DataAcces.AddTest(titleTextBox.Text, Convert.ToInt32(levelTextBox.Text));
-                this.Close();
-            }
+                DataAcces.AddTest(titleTextBox.Text, Convert.ToInt32(levelComboBox.SelectedIndex + 1));
+                this.test = Data.Tests[Data.Tests.Count - 1];
 
+                testButton.Click -= AddTest;
+                testButton.Click += EditTest;
+            }
         }
 
         private void addQuestionButton_Click(object sender, RoutedEventArgs e)
         {
-            AnswersWIndow answersWIndow = new AnswersWIndow(test.Id);
-            this.Hide();
-            answersWIndow.ShowDialog();
-            questionsGrid.Items.Refresh();
-            this.Show();
+            if (this.test != null)
+            {
+                if (this.test.Level == 5)
+                {
+                    TasksWindow tasksWindow = new TasksWindow(test.Id);
+                    this.Hide();
+                    tasksWindow.ShowDialog();
+                    questionsGrid.Items.Refresh();
+                    this.Show();
+                }
+                else
+                {
+                    AnswersWIndow answersWIndow = new AnswersWIndow(test.Id);
+                    this.Hide();
+                    answersWIndow.ShowDialog();
+                    questionsGrid.Items.Refresh();
+                    this.Show();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Перед добавлением вопросов необходимо сохранить тест");
+            }
         }
 
         private void deleteTestButton_Click(object sender, RoutedEventArgs e)
@@ -78,11 +98,29 @@ namespace SharpTests
         {
             if (questionsGrid.SelectedItem != null)
             {
-                AnswersWIndow answersWIndow = new AnswersWIndow((Question)questionsGrid.SelectedItem);
-                this.Hide();
-                answersWIndow.ShowDialog();
-                questionsGrid.Items.Refresh();
-                this.Show();
+                if (this.test != null)
+                {
+                    if (this.test.Level == 5)
+                    {
+                        TasksWindow tasksWindow = new TasksWindow((Question)questionsGrid.SelectedItem);
+                        this.Hide();
+                        tasksWindow.ShowDialog();
+                        questionsGrid.Items.Refresh();
+                        this.Show();
+                    }
+                    else
+                    {
+                        AnswersWIndow answersWIndow = new AnswersWIndow((Question)questionsGrid.SelectedItem);
+                        this.Hide();
+                        answersWIndow.ShowDialog();
+                        questionsGrid.Items.Refresh();
+                        this.Show();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Перед добавлением вопросов необходимо сохранить тест");
+                }
             }
         }
     }

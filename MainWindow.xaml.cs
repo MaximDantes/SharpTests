@@ -19,7 +19,7 @@ namespace SharpTests
         int level = -1;
         public MainWindow()
         {
-            DataAcces.GetTests();
+            DataAcces.GetTestsWithQuestions();
 
             InitializeComponent();
 
@@ -91,10 +91,10 @@ namespace SharpTests
 
                 int index = i;
 
-                if (level == 4)
-                    border.MouseLeftButtonUp += (object sender, MouseButtonEventArgs e) => ShowQuestions(Data.LevlelTests[index].Id);
-                else
+                if (level == 5)
                     border.MouseLeftButtonUp += (object sender, MouseButtonEventArgs e) => ShowTasks(Data.LevlelTests[index].Id);
+                else
+                    border.MouseLeftButtonUp += (object sender, MouseButtonEventArgs e) => ShowQuestions(Data.LevlelTests[index].Id);
 
                 testsGrid.Children.Add(border);
 
@@ -119,7 +119,7 @@ namespace SharpTests
         }
         void ShowTasks(int testId)
         {
-            TaskWindow taskWindow = new TaskWindow();
+            TaskWindow taskWindow = new TaskWindow(Data.LevlelTests.FirstOrDefault(x => x.Id == testId));
             taskWindow.Show();
             this.Close();
         }

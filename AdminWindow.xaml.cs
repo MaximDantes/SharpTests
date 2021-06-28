@@ -25,6 +25,8 @@ namespace SharpTests
 
             testsGrid.ItemsSource = Data.Tests;
             usersGrid.ItemsSource = Data.Users;
+
+            adminLoginTextBox.Text = Data.CurrentUser.Login;
         }
 
         void RefreshGrids()
@@ -104,25 +106,38 @@ namespace SharpTests
         {
             tabControl.SelectedIndex = 0;
         }
-
         private void tab2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             tabControl.SelectedIndex = 1;
+        }
+        private void tab3_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            tabControl.SelectedIndex = 2;
+        }
+        private void tab4_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            tabControl.SelectedIndex = 3;
         }
 
         private void findTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             FindTest();
         }
-
         private void levelTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FindTest();
         }
-
         private void findUserTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             FindUser();
+        }
+
+        private void settingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(adminLoginTextBox.Text) && !String.IsNullOrEmpty(adminPasswordBox.Password) && adminPasswordBox.Password == adminRepeatedPasswordBox.Password)
+            {
+                DataAcces.EditAdmin(adminLoginTextBox.Text, adminPasswordBox.Password);
+            }
         }
     }
 }

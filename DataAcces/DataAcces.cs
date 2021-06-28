@@ -45,6 +45,38 @@ namespace SharpTests
                 Data.Tests.Add(test);
             }
         }
+        public static void GetTestsWithQuestions()
+        {
+            GetTests();
+
+            List<Test> removeList = new List<Test>();
+
+            foreach (Test item in Data.Tests)
+            {
+                GetQuestions(item.Id);
+
+                if (item.Questions.Count == 0)
+                {
+                    removeList.Add(item);
+                }
+                else
+                {
+                    if (item.Level != 5)
+                    {
+                        for (int i = 0; i < item.Questions.Count; i++)
+                        {
+                            if (item.Questions[i].Answers.Count == 0)
+                                removeList.Add(item);
+                        }
+                    }
+                }
+            }
+
+            foreach (Test item in removeList)
+            {
+                Data.Tests.Remove(item);
+            }
+        }
 
         public static void GetTests(int level)
         {
@@ -237,6 +269,11 @@ namespace SharpTests
             bool result = db.ExecuteNonQuery(query);
             SignIn(login, password);
             return result;
+        }
+        public static void EditAdmin(string login, string password)
+        {
+            string query = $"UPDATE `admin` SET `login`='{login}',`password`='{password}'";
+            db.ExecuteQuery(query);
         }
 
         public static int CalcCompletedTestsCount(int level)
