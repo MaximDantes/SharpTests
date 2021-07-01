@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -117,6 +118,30 @@ namespace SharpTests
                 try { question.Answers.Add((string)item.ItemArray[7], false); } catch { }
                 try { question.Answers.Add((string)item.ItemArray[8], false); } catch { }
                 try { question.Answers.Add((string)item.ItemArray[9], false); } catch { }
+
+                int[] indexes = new int[question.Answers.Count];
+                for (int i = 0; i < indexes.Length; i++)
+                {
+                    indexes[i] = i;
+                }
+
+                Random rand = new Random();
+                for (int i = indexes.Length - 1; i >= 1; i--)
+                {
+                    int j = rand.Next(i + 1);
+
+                    int tmp = indexes[j];
+                    indexes[j] = indexes[i];
+                    indexes[i] = tmp;
+                }
+
+                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                for (int i = 0; i < indexes.Length; i++)
+                {
+                    dictionary.Add(question.Answers.ElementAt(indexes[i]).Key, question.Answers.ElementAt(indexes[i]).Value);
+                }
+
+                question.Answers = dictionary;
 
                 test.Questions.Add(question);
             }
@@ -341,9 +366,25 @@ namespace SharpTests
 
         public static void CompleteTest(int testId, double time)
         {
-            string query = $"INSERT INTO `user_test`(`test_id`, `user_id`, `time`) VALUES ({testId},{Data.CurrentUser.Id},{time})";
+            string query = $"SELECT `time` FROM `user_test` WHERE `test_id` = {testId}";
+            DataTable table = db.ExecuteQuery(query);
 
-            db.ExecuteNonQuery(query);
+
+            if (table.Rows.Count == 0)
+            {
+                query = $"INSERT INTO `user_test`(`test_id`, `user_id`, `time`) VALUES ({testId}, {Data.CurrentUser.Id}, {time.ToString(CultureInfo.InvariantCulture)})";
+                db.ExecuteNonQuery(query);
+            }
+            else
+            {
+                double previousTime = (double)table.Rows[0].ItemArray[0];
+
+                if (time < previousTime)
+                {
+                    query = $"UPDATE `user_test` SET `time`= {time.ToString(CultureInfo.InvariantCulture)} WHERE `test_id` = {testId}";
+                    db.ExecuteNonQuery(query);
+                }
+            }
         }
     }
 }

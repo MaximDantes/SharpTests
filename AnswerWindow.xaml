@@ -7,11 +7,11 @@
         xmlns:local="clr-namespace:SharpTests"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="AnswerWindow" Height="300" Width="600">
+        Title="AnswerWindow" Height="250" Width="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.3*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -20,11 +20,11 @@
 
         <TextBox x:Name="answerTextBox" Height="80" FontSize="18" Margin="15"
                  TextWrapping="Wrap"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                  materialDesign:HintAssist.Hint="Ответ"/>
 
         <TextBlock Text="Правильный" Grid.Column="1" HorizontalAlignment="Center"
-                   Margin="0 30" FontSize="16"/>
+                   Margin="0 45" FontSize="16"/>
 
         <CheckBox x:Name="answerCheckBox" Grid.Column="1" VerticalAlignment="Center"
                   HorizontalAlignment="Center"/>

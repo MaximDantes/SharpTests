@@ -6,16 +6,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SharpTests"
         mc:Ignorable="d"
-        Title="TasksWindow" Height="450" Width="800">
+        Title="Вопрос" Height="200" Width="600">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBox Name="questionTextBox" Height="75" FontSize="18" Margin="10"
+        <TextBox Name="questionTextBox" Height="80" FontSize="18" Margin="10"
                  TextWrapping="Wrap" Grid.ColumnSpan="2"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                  materialDesign:HintAssist.Hint="Вопрос"/>
 
         <Button x:Name="questionButton" Grid.Row="1" Width="150" Content="OK"/>

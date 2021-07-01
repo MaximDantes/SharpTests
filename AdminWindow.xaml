@@ -17,19 +17,15 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Grid x:Name="tab1" Grid.Row="0" MouseLeftButtonUp="tab1_MouseLeftButtonUp">
             <Image  Source="tests.png" Margin="10"/>
         </Grid>
-        <Grid x:Name="tab2" Grid.Row="2" MouseLeftButtonUp="tab2_MouseLeftButtonUp">
+        <Grid x:Name="tab2" Grid.Row="1" MouseLeftButtonUp="tab2_MouseLeftButtonUp">
             <Image  Source="users.png" Margin="10"/>
         </Grid>
-        <Grid x:Name="tab3" Grid.Row="1" MouseLeftButtonUp="tab3_MouseLeftButtonUp">
-            <Image  Source="tasks.png" Margin="10"/>
-        </Grid>
-        <Grid x:Name="tab4" Grid.Row="3" MouseLeftButtonUp="tab4_MouseLeftButtonUp">
+        <Grid x:Name="tab4" Grid.Row="2" MouseLeftButtonUp="tab3_MouseLeftButtonUp">
             <Image  Source="settings.png" Margin="10"/>
         </Grid>
 
@@ -54,7 +50,7 @@
                               MouseDoubleClick="testsGrid_MouseDoubleClick">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="3*"/>
-                            <DataGridTextColumn Header="Уроень" Binding="{Binding Level}"/>
+                            <DataGridTextColumn Header="Уровень" Binding="{Binding Level}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -107,7 +103,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0.4*"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <DataGrid x:Name="usersGrid" Grid.RowSpan="5" AutoGenerateColumns="False" IsReadOnly="True"
                               MouseDoubleClick="usersGrid_MouseDoubleClick">
                         <DataGrid.Columns>
@@ -124,8 +120,6 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Visibility="Collapsed"></TabItem>
-            
             <TabItem Visibility="Collapsed">
                 <Grid>
                     <Grid.RowDefinitions>

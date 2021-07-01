@@ -7,7 +7,8 @@
         xmlns:local="clr-namespace:SharpTests"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
-        Title="AuthWindow" Height="450" Width="600">
+        Title="Авторизация" Height="450" Width="600"
+        KeyUp="Window_KeyUp" Icon="spells.png">
     <Grid>
         <TabControl x:Name="tabControl" BorderThickness="0">
 
@@ -50,7 +51,6 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -69,14 +69,10 @@
                                  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                  materialDesign:HintAssist.Hint="повторите пароль"/>
 
-                    <Image x:Name="captchaImage" Grid.Row="3"/>
-
-                    <TextBox x:Name="captchaTextBox" Grid.Row="3" Grid.Column="1" FontSize="18" Height="52" MaxWidth="200"/>
-
-                    <Button x:Name="backButton" Grid.Row="4" MaxWidth="200" Content="Назад"
+                    <Button x:Name="backButton" Grid.Row="3" MaxWidth="200" Content="Назад"
                             Click="backButton_Click"/>
 
-                    <Button x:Name="signUpConfirmButton" Grid.Row="4" Grid.Column="1" MaxWidth="200" 
+                    <Button x:Name="signUpConfirmButton" Grid.Row="3" Grid.Column="1" MaxWidth="200" 
                             Content="Зарагистрироваться" Click="signUpConfirmButton_Click"/>
                 </Grid>
             </TabItem>

@@ -49,6 +49,8 @@ namespace SharpTests
             answerBorder3.BorderBrush = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             answerBorder4.BorderBrush = new SolidColorBrush(Color.FromRgb(103, 58, 183));
 
+            this.Title = $"Вопрос {currentQuestionNumber + 1}";
+
             mistakesTextBox.Text = $"Ошибки: {mistakesCount}";
 
             progressTextBox.Text = $"{currentQuestionNumber + 1} / {Data.Questions.Count}";
@@ -92,7 +94,7 @@ namespace SharpTests
                 if (mistakesCount == 0 && semicorrectCount == 0)
                     DataAcces.CompleteTest(testId, time / 10);
 
-                ResultWindow resultWindow = new ResultWindow(currentQuestionNumber + 1 - mistakesCount, semicorrectCount, mistakesCount - semicorrectCount, time / 10);
+                ResultWindow resultWindow = new ResultWindow(currentQuestionNumber + 1 - mistakesCount, semicorrectCount, mistakesCount - semicorrectCount, time / 10.0);
                 resultWindow.Show();
                 this.Close();
             }
@@ -183,26 +185,58 @@ namespace SharpTests
         private void answerBorder1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Border border = sender as Border;
-            border.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-            selectedAnswers.Add(0);
+            if (selectedAnswers.Contains(0))
+            {
+                border.BorderBrush = new SolidColorBrush(Color.FromRgb(103, 58, 183));
+                selectedAnswers.Remove(0);
+            }
+            else
+            {
+                border.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 0));
+                selectedAnswers.Add(0);
+            }
         }
         private void answerBorder2_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Border border = sender as Border;
-            border.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-            selectedAnswers.Add(1);
+            if (selectedAnswers.Contains(1))
+            {
+                border.BorderBrush = new SolidColorBrush(Color.FromRgb(103, 58, 183));
+                selectedAnswers.Remove(1);
+            }
+            else
+            {
+                border.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 0));
+                selectedAnswers.Add(1);
+            }
         }
         private void answerBorder3_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Border border = sender as Border;
-            border.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-            selectedAnswers.Add(2);
+            if (selectedAnswers.Contains(2))
+            {
+                border.BorderBrush = new SolidColorBrush(Color.FromRgb(103, 58, 183));
+                selectedAnswers.Remove(2);
+            }
+            else
+            {
+                border.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 0));
+                selectedAnswers.Add(2);
+            }
         }
         private void answerBorder4_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Border border = sender as Border;
-            border.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-            selectedAnswers.Add(3);
+            if (selectedAnswers.Contains(3))
+            {
+                border.BorderBrush = new SolidColorBrush(Color.FromRgb(103, 58, 183));
+                selectedAnswers.Remove(3);
+            }
+            else
+            {
+                border.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 255, 0));
+                selectedAnswers.Add(3);
+            }
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

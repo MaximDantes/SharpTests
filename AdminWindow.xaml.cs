@@ -114,10 +114,6 @@ namespace SharpTests
         {
             tabControl.SelectedIndex = 2;
         }
-        private void tab4_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            tabControl.SelectedIndex = 3;
-        }
 
         private void findTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {

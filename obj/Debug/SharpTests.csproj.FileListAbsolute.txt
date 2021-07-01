@@ -62,3 +62,5 @@ C:\cursach\SharpTests\obj\Debug\UserWindow.g.cs
 C:\cursach\SharpTests\obj\Debug\UserWindow.baml
 C:\cursach\SharpTests\obj\Debug\TasksWindow.g.cs
 C:\cursach\SharpTests\obj\Debug\TasksWindow.baml
+C:\cursach\SharpTests\obj\Debug\MessageWindow.g.cs
+C:\cursach\SharpTests\obj\Debug\MessageWindow.baml

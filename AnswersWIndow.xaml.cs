@@ -67,13 +67,22 @@ namespace SharpTests
         {
             if (this.question != null)
             {
-                AnswerWindow answerWindow = new AnswerWindow(question);
-                answerWindow.ShowDialog();
-                RefreshGrid();
+                if (question.Answers.Count >= 4)
+                {
+                    MessageWindow messageWindow = new MessageWindow("Нельзя добавить более 4-х ответов");
+                    messageWindow.ShowDialog();
+                }
+                else
+                {
+                    AnswerWindow answerWindow = new AnswerWindow(question);
+                    answerWindow.ShowDialog();
+                    RefreshGrid();
+                }
             }
             else
             {
-                MessageBox.Show("Перед добавлением ответов необходимо сохранить вопрос");
+                MessageWindow messageWindow = new MessageWindow("Перед добавлением ответов необходимо сохранить вопрос");
+                messageWindow.ShowDialog();
             }
         }
 

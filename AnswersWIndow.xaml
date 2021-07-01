@@ -21,9 +21,9 @@
             <ColumnDefinition Width="0.15*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Name="questionTextBox" Height="75" FontSize="18" Margin="10"
+        <TextBox Name="questionTextBox" Height="80" FontSize="18" Margin="10"
                  TextWrapping="Wrap" Grid.ColumnSpan="2"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
                  materialDesign:HintAssist.Hint="Вопрос"/>
 
         <DataGrid Name="answersGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"

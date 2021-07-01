@@ -42,14 +42,13 @@ namespace SharpTests
                     }
                     else
                     {
-                        MessageBox.Show("Неправильный логин или пароль");
+                        MessageWindow messageWindow = new MessageWindow("Неправильный логин или пароль");
+                        messageWindow.ShowDialog();
                     }
-
                 }
         }
         void SignUp()
         {
-            //TODO captcha
             if (!String.IsNullOrEmpty(newLoginTextBox.Text) && !String.IsNullOrEmpty(newPasswordTextBox.Password)
                 && newPasswordTextBox.Password == RepeatedPasswordTextBox.Password)
                 if (DataAcces.SignUp(newLoginTextBox.Text, newPasswordTextBox.Password))
@@ -60,7 +59,8 @@ namespace SharpTests
                 }
                 else
                 {
-                    MessageBox.Show("Такой логин уже существует");
+                    MessageWindow messageWindow = new MessageWindow("Такой логин уже существует");
+                    messageWindow.ShowDialog();
                 }
         }
 
@@ -80,6 +80,12 @@ namespace SharpTests
         private void signInButton_Click(object sender, RoutedEventArgs e)
         {
             SignIn();
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && tabControl.SelectedIndex == 0)
+                SignIn();
         }
     }
 }

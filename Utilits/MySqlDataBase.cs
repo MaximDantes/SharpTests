@@ -81,9 +81,9 @@ namespace SharpTests
             return reader;
         }
 
-        ~MySqlDataBase()
-        {
-            this.Close();
-        }
+        //~MySqlDataBase()
+        //{
+        //    this.Close();
+        //}
     }
 }

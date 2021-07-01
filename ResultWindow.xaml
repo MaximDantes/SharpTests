@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:SharpTests"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="ResultWindow" Height="450" Width="650">
+        Title="Результаты тестирования" Height="450" Width="700">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="7*"/>
@@ -21,9 +21,9 @@
         <lvc:PieChart Name="pieChart" LegendLocation="Left" DataClick="Chart_OnDataClick" 
                       DataTooltip="{x:Null}" Grid.ColumnSpan="2">
             <lvc:PieChart.Series>
-                <lvc:PieSeries Name="correct" Title="Правильно" Values="1" DataLabels="True"
+                <lvc:PieSeries Name="correct" Title="Правильные" Values="1" DataLabels="True"
                                LabelPoint="{Binding PointLabel}"/>
-                <lvc:PieSeries Name="semicorrect" Title="Полуправильные" Values="1" DataLabels="True" 
+                <lvc:PieSeries Name="semicorrect" Title="Частично правильные" Values="1" DataLabels="True" 
                                LabelPoint="{Binding PointLabel}"/>
                 <lvc:PieSeries Name="incorrect" Title="Неправильные" Values="1" DataLabels="True" 
                                LabelPoint="{Binding PointLabel}"/>

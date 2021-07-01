@@ -22,6 +22,8 @@ namespace SharpTests
 
         int currentQuestion;
 
+        int time;
+
         public TaskWindow(Test test)
         {
             this.test = test;
@@ -29,6 +31,8 @@ namespace SharpTests
             DataAcces.GetQuestions(test.Id);
 
             InitializeComponent();
+
+            ShowTime();
 
             ShowQuestion(0);
         }
@@ -67,7 +71,14 @@ namespace SharpTests
             }
             else
             {
+                DataAcces.CompleteTest(test.Id, time / 10.0);
 
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                this.Close();
+
+                MessageWindow messageWindow = new MessageWindow($"Задания завершены за {time / 10.0} c");
+                messageWindow.ShowDialog();
             }
         }
 
@@ -76,6 +87,17 @@ namespace SharpTests
             output.Text += message;
         }
 
+        async void ShowTime()
+        {
+            while (true)
+            {
+                time++;
+
+                timeTextBox.Text = Convert.ToString(time / 10.0);
+
+                await Task.Delay(100);
+            }
+        }
 
         void Run()
         {
@@ -92,6 +114,11 @@ namespace SharpTests
         private void forwardButton_Click(object sender, RoutedEventArgs e)
         {
             ShowQuestion(currentQuestion + 1);
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

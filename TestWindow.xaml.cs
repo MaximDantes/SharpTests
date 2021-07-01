@@ -22,11 +22,15 @@ namespace SharpTests
         {
             InitializeComponent();
 
+            this.Title = "Тест";
+
             testButton.Click += AddTest;
         }
         public TestWindow(Test test) : this()
         {
             this.test = test;
+
+            this.Title = test.Title;
 
             titleTextBox.Text = test.Title;
             levelComboBox.SelectedIndex = test.Level - 1;
@@ -67,6 +71,7 @@ namespace SharpTests
                     TasksWindow tasksWindow = new TasksWindow(test.Id);
                     this.Hide();
                     tasksWindow.ShowDialog();
+                    questionsGrid.ItemsSource = Data.Tests.FirstOrDefault(x => x.Id == test.Id).Questions;
                     questionsGrid.Items.Refresh();
                     this.Show();
                 }
@@ -75,13 +80,15 @@ namespace SharpTests
                     AnswersWIndow answersWIndow = new AnswersWIndow(test.Id);
                     this.Hide();
                     answersWIndow.ShowDialog();
+                    questionsGrid.ItemsSource = Data.Tests.FirstOrDefault(x => x.Id == test.Id).Questions;
                     questionsGrid.Items.Refresh();
                     this.Show();
                 }
             }
             else
             {
-                MessageBox.Show("Перед добавлением вопросов необходимо сохранить тест");
+                MessageWindow messageWindow = new MessageWindow("Перед добавлением вопросов необходимо сохранить тест");
+                messageWindow.ShowDialog();
             }
         }
 
