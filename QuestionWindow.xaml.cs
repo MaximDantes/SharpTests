@@ -28,6 +28,7 @@ namespace SharpTests
             this.testId = testId;
 
             DataAcces.GetQuestions(testId);
+            DataAcces.MixAnswers(testId);
             InitializeComponent();
 
             answerRow1.Height = new GridLength(0, GridUnitType.Star);
@@ -44,6 +45,9 @@ namespace SharpTests
         {
             isMistaken = false;
             selectedAnswers.Clear();
+
+
+
             answerBorder1.BorderBrush = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             answerBorder2.BorderBrush = new SolidColorBrush(Color.FromRgb(103, 58, 183));
             answerBorder3.BorderBrush = new SolidColorBrush(Color.FromRgb(103, 58, 183));

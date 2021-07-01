@@ -24,7 +24,8 @@ namespace SharpTests
 
             timeTextBox.Text = Convert.ToString(time) + " c";
 
-            //pieChart.SeriesColors = new ColorsCollection() { Colors.Green, Colors.Yellow, Colors.Red };
+            //TODO colors
+            //pieChart.SeriesColors = new ColorsCollection() { Colors.Green, Colors.Yellow, Colors.Red };  33,149,242     254,192,7     243,67,54
 
             PointLabel = chartPoint =>
                 string.Format("{0} ({1:P})", chartPoint.Y, chartPoint.Participation);

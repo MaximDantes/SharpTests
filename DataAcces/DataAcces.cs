@@ -119,30 +119,6 @@ namespace SharpTests
                 try { question.Answers.Add((string)item.ItemArray[8], false); } catch { }
                 try { question.Answers.Add((string)item.ItemArray[9], false); } catch { }
 
-                int[] indexes = new int[question.Answers.Count];
-                for (int i = 0; i < indexes.Length; i++)
-                {
-                    indexes[i] = i;
-                }
-
-                Random rand = new Random();
-                for (int i = indexes.Length - 1; i >= 1; i--)
-                {
-                    int j = rand.Next(i + 1);
-
-                    int tmp = indexes[j];
-                    indexes[j] = indexes[i];
-                    indexes[i] = tmp;
-                }
-
-                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
-                for (int i = 0; i < indexes.Length; i++)
-                {
-                    dictionary.Add(question.Answers.ElementAt(indexes[i]).Key, question.Answers.ElementAt(indexes[i]).Value);
-                }
-
-                question.Answers = dictionary;
-
                 test.Questions.Add(question);
             }
 
@@ -300,6 +276,37 @@ namespace SharpTests
             string query = $"UPDATE `admin` SET `login`='{login}',`password`='{password}'";
             db.ExecuteQuery(query);
         }
+        public static void EditAnswer(Question question, string text, bool isCorrect)
+        {
+            //TODO
+            int correctCount = 0;
+            int incorrectCount = 0;
+            for (int i = 0; i < question.Answers.Count; i++)
+            {
+                if (question.Answers.ElementAt(i).Value)
+                {
+                    correctCount++;
+                    if (question.Answers.ElementAt(i).Value == isCorrect && question.Answers.ElementAt(i).Key == text)
+                        break;
+                }
+                else
+                {
+                    incorrectCount++;
+                    if (question.Answers.ElementAt(i).Value == isCorrect && question.Answers.ElementAt(i).Key == text)
+                        break;
+                }
+            }
+            string query;
+
+            if (isCorrect)
+                query = $"UPDATE `questions` SET `correct_answer_{correctCount}`= '{text}' WHERE `question_id` = {question.Id}";
+            else
+                query = $"UPDATE `questions` SET `incorrect_answer_{incorrectCount}`= '{text} WHERE `question_id` = {question.Id}";
+
+            db.ExecuteNonQuery(query);
+
+            GetQuestions(question.Test.Id);
+        }
 
         public static int CalcCompletedTestsCount(int level)
         {
@@ -384,6 +391,37 @@ namespace SharpTests
                     query = $"UPDATE `user_test` SET `time`= {time.ToString(CultureInfo.InvariantCulture)} WHERE `test_id` = {testId}";
                     db.ExecuteNonQuery(query);
                 }
+            }
+        }
+        public static void MixAnswers(int testId)
+        {
+            Test test = Data.Tests.First(x => x.Id == testId);
+
+            foreach (Question question in test.Questions)
+            {
+                int[] indexes = new int[question.Answers.Count];
+                for (int i = 0; i < indexes.Length; i++)
+                {
+                    indexes[i] = i;
+                }
+
+                Random rand = new Random();
+                for (int i = indexes.Length - 1; i >= 1; i--)
+                {
+                    int j = rand.Next(i + 1);
+
+                    int tmp = indexes[j];
+                    indexes[j] = indexes[i];
+                    indexes[i] = tmp;
+                }
+
+                Dictionary<string, bool> dictionary = new Dictionary<string, bool>();
+                for (int i = 0; i < indexes.Length; i++)
+                {
+                    dictionary.Add(question.Answers.ElementAt(indexes[i]).Key, question.Answers.ElementAt(indexes[i]).Value);
+                }
+
+                question.Answers = dictionary;
             }
         }
     }
